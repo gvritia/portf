@@ -216,7 +216,7 @@ function addDiaryEntry() {
 
 function formatDate(dateString) {
     const date = new Date(dateString);
-    return `${date.getDate()} ${date.toLocaleString('ru-RU', { month: 'short' })}`;
+    return `${date.getDate()} ${date.toLocaleString('ru-RU', {month: 'short'})}`;
 }
 
 function addEntryToUI(entryData) {
@@ -224,9 +224,9 @@ function addEntryToUI(entryData) {
     if (!progressTimeline) return;
 
     const statusConfig = {
-        'in-progress': { text: 'in progress', class: 'progress-item--in-progress' },
-        'completed': { text: '✓', class: 'progress-item--completed' },
-        'planned': { text: 'planned', class: 'progress-item--planned' }
+        'in-progress': {text: 'in progress', class: 'progress-item--in-progress'},
+        'completed': {text: '✓', class: 'progress-item--completed'},
+        'planned': {text: 'planned', class: 'progress-item--planned'}
     };
 
     const status = statusConfig[entryData.status] || statusConfig['in-progress'];
@@ -275,6 +275,93 @@ function updateCourseProgress(courseName, progress) {
 
 // ==================== ФУНКЦИИ ДЛЯ ПРОЕКТОВ (projects.html) ====================
 
+// Замените функцию openProjectModal в файле main.js на эту версию.
+// Я удалил лишнюю секцию с галереей скриншотов (modal-project__screenshots), так как она вызывала "перемешивание" из-за отсутствующих изображений и плейсхолдеров.
+// Упростил описание, чтобы оно было более компактным и без повторений.
+// Установил фиксированную ссылку для "Живая версия" на https://gvritia.github.io/portf/ для всех проектов (как указано в запросе).
+// Если нужно разные ссылки для разных проектов, уточните — сейчас сделал унифицированно.
+// Также удалил ненужные мета-поля (категория и технологии дублируют карточку, оставил только описание и ссылки для чистоты).
+
+function openProjectModal(title, category, tags) {
+    const modal = document.getElementById('project-modal');
+    const modalBody = document.querySelector('.modal__body');
+
+    if (!modal || !modalBody) {
+        console.error('Модальное окно не найдено');
+        return;
+    }
+
+    // Фиксированная ссылка для "Живая версия" как указано
+    let liveLink = "https://gvritia.github.io/portf/";
+    // Ссылка на код (оставляем как есть, с дефолтом)
+    let codeLink = "https://github.com/gvritia/portf";
+
+    // Определяем ссылки в зависимости от проекта (если нужно переопределить код, но liveLink фиксированная)
+    switch (title) {
+        case "Личный сайт":
+            codeLink = "https://github.com/gvritia";
+            break;
+        case "Todo-приложение":
+            codeLink = "https://github.com/gvritia/todo-app";
+            break;
+        case "Интернет-магазин":
+            codeLink = "https://github.com/gvritia/ecommerce";
+            break;
+        case "Портфолио":
+            codeLink = "https://github.com/gvritia/portf";
+            break;
+        case "Приложение погоды":
+            codeLink = "https://github.com/gvritia/weather-app";
+            break;
+    }
+
+    // Упрощенное описание без повторений
+    let description = "";
+    switch (title) {
+        case "Личный сайт":
+            description = "Персональный веб-сайт-визитка с информацией о навыках и опыте. Реализован с использованием современных веб-технологий.";
+            break;
+        case "Todo-приложение":
+            description = "Интерактивное приложение для управления задачами с возможностью добавления, редактирования, удаления и фильтрации задач.";
+            break;
+        case "Интернет-магазин":
+            description = "Полнофункциональный интернет-магазин с корзиной покупок, фильтрацией товаров и системой оформления заказов.";
+            break;
+        case "Портфолио":
+            description = "Веб-портфолио с галереей проектов, дневником обучения и контактной информацией. Демонстрирует навыки фронтенд-разработки.";
+            break;
+        case "Приложение погоды":
+            description = "Приложение для просмотра текущей погоды и прогноза с использованием внешнего API и геолокации.";
+            break;
+        default:
+            description = "Инновационный проект, демонстрирующий современные подходы к веб-разработке.";
+    }
+
+    modalBody.innerHTML = `
+        <div class="modal-project">
+            <h2 class="modal-project__title">${title}</h2>
+            
+            <div class="modal-project__description">
+                <p>${description}</p>
+            </div>
+            
+            <div class="modal-project__links">
+                <a href="${liveLink}" target="_blank" class="modal-project__link">
+                    <span>🌐 Живая версия</span>
+                </a>
+                <a href="${codeLink}" target="_blank" class="modal-project__link modal-project__link--secondary">
+                    <span>💻 Исходный код</span>
+                </a>
+            </div>
+        </div>
+    `;
+
+    // modal.style.display = 'flex';
+    // document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+    modal.showModal();
+
+}
+
 function initProjects() {
     console.log('Инициализация проектов...');
 
@@ -286,7 +373,7 @@ function initProjects() {
     console.log('Карточки проектов:', projectCards.length);
 
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             console.log('Клик по фильтру:', this.getAttribute('data-filter'));
 
             // Убираем активный класс у всех кнопок
@@ -308,7 +395,7 @@ function initProjects() {
 
     // Открытие модального окна проекта
     projectCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
             const title = this.querySelector('.project-card__title').textContent;
             const category = this.getAttribute('data-category');
             const tags = Array.from(this.querySelectorAll('.tag')).map(tag => tag.textContent);
@@ -322,56 +409,33 @@ function initProjects() {
     const modalClose = document.getElementById('modal-close');
     const modal = document.getElementById('project-modal');
 
+    // В функции initProjects() замените обработчик закрытия:
     if (modalClose && modal) {
-        modalClose.addEventListener('click', function() {
-            modal.style.display = 'none';
+        modalClose.addEventListener('click', function () {
+            // modal.style.display = 'none';
+            // document.body.style.overflow = 'auto'; // Возвращаем скролл
+            modal.close();
         });
 
         // Закрытие при клике вне окна
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             if (event.target === modal) {
-                modal.style.display = 'none';
+                // modal.style.display = 'none';
+                // document.body.style.overflow = 'auto';
+                modal.close();
+
+            }
+        });
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal.style.display === 'flex') {
+                // modal.style.display = 'none';
+                // document.body.style.overflow = 'auto';
+                modal.close();
             }
         });
     }
-}
-
-function openProjectModal(title, category, tags) {
-    const modal = document.getElementById('project-modal');
-    const modalBody = document.querySelector('.modal__body');
-
-    if (!modal || !modalBody) {
-        console.error('Модальное окно не найдено');
-        return;
-    }
-
-    modalBody.innerHTML = `
-        <div class="modal-project">
-            <h2 class="modal-project__title">${title}</h2>
-            <div class="modal-project__description">
-                <p><strong>Категория:</strong> ${category}</p>
-                <p><strong>Технологии:</strong> ${tags.join(', ')}</p>
-                <p>Подробное описание проекта будет здесь. Здесь можно разместить информацию о целях проекта, используемых технологиях, решенных задачах и достигнутых результатах.</p>
-            </div>
-            <div class="modal-project__screenshots">
-                <h3>Скриншоты проекта</h3>
-                <div class="screenshots-grid">
-                    <div class="screenshot-item">
-                        <img src="images/project-detail-1.jpg" alt="Скриншот проекта 1">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="images/project-detail-2.jpg" alt="Скриншот проекта 2">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-project__links">
-                <a href="#" class="modal-project__link">Живая версия</a>
-                <a href="#" class="modal-project__link modal-project__link--secondary">Исходный код</a>
-            </div>
-        </div>
-    `;
-
-    modal.style.display = 'block';
 }
 
 // ==================== ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ ====================

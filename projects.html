@@ -114,10 +114,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="projects__progress">
-                <span class="progress-text">2/5</span>
-            </div>
         </section>
     </main>
 
@@ -128,13 +124,14 @@
 </div>
 
 <!-- Модальное окно для проекта -->
-<div class="modal" id="project-modal">
-    <div class="modal__content">
+<dialog id="project-modal">
+    <div class="modal-header">
         <button class="modal__close" id="modal-close">&times;</button>
-        <div class="modal__body">
-        </div>
     </div>
-</div>
+    <div class="modal-content modal__body">
+        <!-- Контент будет заполнен JavaScript -->
+    </div>
+</dialog>
 
 <script src="main.js" defer></script>
 </body>
