@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный дневник</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+<div class="page">
+    <!-- Шапка -->
+    <header class="header">
+        <h1 class="header__title">Моё портфолио</h1>
+    </header>
 
+    <!-- Навигация -->
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item">
+                <a class="nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="projects.html">Проекты</a>
+            </li>
+            <li class="nav__item nav__item--active">
+                <a class="nav__link" href="diary.html">Дневник</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="contacts.html">Контакты</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <h1 class="diary__title">Мой учебный прогресс</h1>
+
+        <!-- Секция последних активностей -->
+        <section class="progress-section">
+            <h2 class="progress-section__title">Последние активности</h2>
+            <div class="progress-timeline">
+                <div class="progress-item progress-item--completed">
+                    <span class="progress-item__date">15 дек</span>
+                    <span class="progress-item__task">Верстка макета сайта</span>
+                    <span class="progress-item__status">✓</span>
+                </div>
+                <div class="progress-item progress-item--completed">
+                    <span class="progress-item__date">10 дек</span>
+                    <span class="progress-item__task">JavaScript основы</span>
+                    <span class="progress-item__status">✓</span>
+                </div>
+                <div class="progress-item progress-item--in-progress">
+                    <span class="progress-item__date">05 дек</span>
+                    <span class="progress-item__task">Работа с формами</span>
+                    <span class="progress-item__status">in progress</span>
+                </div>
+                <div class="progress-item progress-item--in-progress">
+                    <span class="progress-item__date">01 дек</span>
+                    <span class="progress-item__task">Адаптивный дизайн</span>
+                    <span class="progress-item__status">in progress</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция текущих курсов -->
+        <section class="courses-section">
+            <h2 class="courses-section__title">Текущие курсы</h2>
+            <div class="courses-list">
+                <div class="course-card">
+                    <div class="course-card__header">
+                        <h3 class="course-card__title">JavaScript</h3>
+                        <span class="course-card__progress">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-card__header">
+                        <h3 class="course-card__title">HTML/CSS</h3>
+                        <span class="course-card__progress">90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-card__header">
+                        <h3 class="course-card__title">React</h3>
+                        <span class="course-card__progress">40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 40%"></div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-card__header">
+                        <h3 class="course-card__title">Базы данных</h3>
+                        <span class="course-card__progress">60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка добавления записи -->
+        <div class="diary-actions">
+            <button class="btn btn--primary" id="addEntryBtn">Добавить запись</button>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <p class="footer__text">© 2025 Контакты</p>
+    </footer>
+</div>
+
+<script src="main.js"></script>
 </body>
 </html>

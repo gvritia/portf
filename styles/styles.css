@@ -843,3 +843,203 @@ dialog {
         max-width: 100%; /* На мобильных тоже занимает всю ширину */
     }
 }
+
+/* Стили для страницы дневника */
+.diary__title {
+    color: var(--color-main);
+    margin-bottom: var(--space-lg);
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* Секция прогресса */
+.progress-section {
+    background: var(--color-white);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.progress-section__title {
+    color: var(--color-main);
+    margin-bottom: var(--space-md);
+    font-size: 1.3rem;
+}
+
+/* Таймлайн прогресса */
+.progress-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    background: var(--color-light);
+    transition: transform 0.3s;
+}
+
+.progress-item:hover {
+    transform: translateX(5px);
+}
+
+.progress-item__date {
+    font-weight: bold;
+    color: var(--color-accent);
+    min-width: 80px;
+}
+
+.progress-item__task {
+    flex: 1;
+    color: var(--color-text);
+}
+
+.progress-item__status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.progress-item--completed .progress-item__status {
+    background: #27ae60;
+    color: white;
+}
+
+.progress-item--in-progress .progress-item__status {
+    background: #f39c12;
+    color: white;
+}
+
+/* Секция курсов */
+.courses-section {
+    background: var(--color-white);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.courses-section__title {
+    color: var(--color-main);
+    margin-bottom: var(--space-md);
+    font-size: 1.3rem;
+}
+
+.courses-list {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.course-card {
+    background: var(--color-light);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--color-accent);
+}
+
+.course-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.course-card__title {
+    color: var(--color-main);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.course-card__progress {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+/* Прогресс-бар */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: var(--gradient-skill);
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Кнопки действий */
+.diary-actions {
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+
+/* Темная тема для дневника */
+body.dark-theme .progress-item {
+    background: var(--color-dark);
+}
+
+body.dark-theme .course-card {
+    background: var(--color-dark);
+}
+
+body.dark-theme .progress-bar {
+    background: #2c2c2c;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .progress-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+
+    .progress-item__date {
+        min-width: auto;
+    }
+
+    .course-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+}
+/* Дополнительные стили для дневника */
+.progress-item--planned .progress-item__status {
+    background: #95a5a6;
+    color: white;
+}
+
+.diary-form {
+    max-width: 100%;
+}
+
+#progressValue {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+#entryProgress {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Темная тема для новых элементов */
+body.dark-theme .progress-item--planned .progress-item__status {
+    background: #7f8c8d;
+}
+
+body.dark-theme #progressValue {
+    color: var(--color-accent);
+}
