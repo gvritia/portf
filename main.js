@@ -1,3 +1,7 @@
+// main.js - единый файл для всех страниц
+
+// ==================== ОБЩИЕ ФУНКЦИИ ====================
+
 // Функция для отправки формы (используется на contacts.html)
 function submitForm() {
     const form = document.getElementById('feedbackForm');
@@ -22,9 +26,12 @@ function submitForm() {
     form.reset();
 }
 
-// Функции для работы с учебным дневником
+// ==================== ФУНКЦИИ ДЛЯ ДНЕВНИКА (diary.html) ====================
+
 function initDiary() {
     const addEntryBtn = document.getElementById('addEntryBtn');
+    console.log('Кнопка дневника:', addEntryBtn);
+
     if (!addEntryBtn) return;
 
     createAddEntryModal();
@@ -35,7 +42,7 @@ function createAddEntryModal() {
     if (document.getElementById('diaryModal')) return;
 
     const modalHTML = `
-        <dialog class="modal" id="diaryModal">
+        <dialog id="diaryModal">
             <div class="modal-header">
                 <h2 class="modal-header__title">Добавить учебную запись</h2>
             </div>
@@ -104,29 +111,52 @@ function setupDiaryModalEvents() {
     const progressInput = document.getElementById('entryProgress');
 
     if (diaryModal) {
-        diaryModal.addEventListener('click', (e) => e.target === diaryModal && diaryModal.close());
+        diaryModal.addEventListener('click', (e) => {
+            if (e.target === diaryModal) {
+                diaryModal.close();
+            }
+        });
     }
 
-    cancelBtn?.addEventListener('click', () => diaryModal?.close());
+    if (cancelBtn && diaryModal) {
+        cancelBtn.addEventListener('click', () => diaryModal.close());
+    }
 
-    courseSelect?.addEventListener('change', () => {
-        document.getElementById('customCourseGroup').style.display =
-            courseSelect.value === 'Другой' ? 'block' : 'none';
-    });
+    if (courseSelect) {
+        courseSelect.addEventListener('change', () => {
+            const customCourseGroup = document.getElementById('customCourseGroup');
+            if (customCourseGroup) {
+                customCourseGroup.style.display = courseSelect.value === 'Другой' ? 'block' : 'none';
+            }
+        });
+    }
 
-    progressInput?.addEventListener('input', () => {
-        document.getElementById('progressValue').textContent = progressInput.value + '%';
-    });
+    if (progressInput) {
+        progressInput.addEventListener('input', () => {
+            const progressValue = document.getElementById('progressValue');
+            if (progressValue) {
+                progressValue.textContent = progressInput.value + '%';
+            }
+        });
+    }
 
-    diaryForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        addDiaryEntry();
-    });
+    if (diaryForm) {
+        diaryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            addDiaryEntry();
+        });
+    }
 }
 
 function openAddEntryModal() {
+    console.log('Функция openAddEntryModal вызвана');
     const diaryModal = document.getElementById('diaryModal');
-    if (!diaryModal) return;
+    console.log('Модальное окно найдено:', diaryModal);
+
+    if (!diaryModal) {
+        console.error('Модальное окно diaryModal не найдено!');
+        return;
+    }
 
     const dateInput = document.getElementById('entryDate');
     const diaryForm = document.getElementById('diaryForm');
@@ -136,10 +166,14 @@ function openAddEntryModal() {
     if (diaryForm) diaryForm.reset();
     if (progressInput) {
         progressInput.value = 0;
-        document.getElementById('progressValue').textContent = '0%';
+        const progressValue = document.getElementById('progressValue');
+        if (progressValue) progressValue.textContent = '0%';
     }
 
-    document.getElementById('customCourseGroup').style.display = 'none';
+    const customCourseGroup = document.getElementById('customCourseGroup');
+    if (customCourseGroup) customCourseGroup.style.display = 'none';
+
+    console.log('Показываем модальное окно');
     diaryModal.showModal();
 }
 
@@ -174,7 +208,9 @@ function addDiaryEntry() {
     addEntryToUI(entryData);
     updateCourseProgress(entryData.course, entryData.progress);
 
-    document.getElementById('diaryModal').close();
+    const diaryModal = document.getElementById('diaryModal');
+    if (diaryModal) diaryModal.close();
+
     alert('Запись успешно добавлена!');
 }
 
@@ -237,8 +273,112 @@ function updateCourseProgress(courseName, progress) {
     }
 }
 
-// Инициализация всех функций при загрузке DOM
+// ==================== ФУНКЦИИ ДЛЯ ПРОЕКТОВ (projects.html) ====================
+
+function initProjects() {
+    console.log('Инициализация проектов...');
+
+    // Фильтрация проектов
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    console.log('Кнопки фильтров:', filterButtons.length);
+    console.log('Карточки проектов:', projectCards.length);
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('Клик по фильтру:', this.getAttribute('data-filter'));
+
+            // Убираем активный класс у всех кнопок
+            filterButtons.forEach(btn => btn.classList.remove('filter-btn--active'));
+            // Добавляем активный класс текущей кнопке
+            this.classList.add('filter-btn--active');
+
+            const filter = this.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Открытие модального окна проекта
+    projectCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.querySelector('.project-card__title').textContent;
+            const category = this.getAttribute('data-category');
+            const tags = Array.from(this.querySelectorAll('.tag')).map(tag => tag.textContent);
+
+            console.log('Открытие проекта:', title);
+            openProjectModal(title, category, tags);
+        });
+    });
+
+    // Закрытие модального окна
+    const modalClose = document.getElementById('modal-close');
+    const modal = document.getElementById('project-modal');
+
+    if (modalClose && modal) {
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Закрытие при клике вне окна
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+}
+
+function openProjectModal(title, category, tags) {
+    const modal = document.getElementById('project-modal');
+    const modalBody = document.querySelector('.modal__body');
+
+    if (!modal || !modalBody) {
+        console.error('Модальное окно не найдено');
+        return;
+    }
+
+    modalBody.innerHTML = `
+        <div class="modal-project">
+            <h2 class="modal-project__title">${title}</h2>
+            <div class="modal-project__description">
+                <p><strong>Категория:</strong> ${category}</p>
+                <p><strong>Технологии:</strong> ${tags.join(', ')}</p>
+                <p>Подробное описание проекта будет здесь. Здесь можно разместить информацию о целях проекта, используемых технологиях, решенных задачах и достигнутых результатах.</p>
+            </div>
+            <div class="modal-project__screenshots">
+                <h3>Скриншоты проекта</h3>
+                <div class="screenshots-grid">
+                    <div class="screenshot-item">
+                        <img src="images/project-detail-1.jpg" alt="Скриншот проекта 1">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/project-detail-2.jpg" alt="Скриншот проекта 2">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-project__links">
+                <a href="#" class="modal-project__link">Живая версия</a>
+                <a href="#" class="modal-project__link modal-project__link--secondary">Исходный код</a>
+            </div>
+        </div>
+    `;
+
+    modal.style.display = 'block';
+}
+
+// ==================== ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ ====================
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM загружен, инициализация...');
+
     // Обработчики для контактной формы
     const contactModal = document.getElementById('contactModal');
     const feedbackForm = document.getElementById('feedbackForm');
@@ -260,6 +400,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Инициализация дневника
+    // Инициализация дневника (если мы на странице diary.html)
     initDiary();
+
+    // Инициализация проектов (если мы на странице projects.html)
+    initProjects();
 });

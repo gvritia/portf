@@ -1,10 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты - Портфолио</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+<!-- Основной контейнер -->
+<div class="page">
 
+    <!-- Шапка -->
+    <header class="header">
+        <h1 class="header__title">Моё портфолио</h1>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item">
+                <a class="nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="nav__item nav__item--active">
+                <a class="nav__link" href="projects.html">Проекты</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="diary.html">Дневник</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="contacts.html">Контакты</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <section class="projects">
+            <div class="projects__header">
+                <h2 class="projects__title">Мои проекты</h2>
+                <div class="projects__filters">
+                    <button class="filter-btn filter-btn--active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="html">HTML</button>
+                    <button class="filter-btn" data-filter="js">JS</button>
+                    <button class="filter-btn" data-filter="react">React</button>
+                </div>
+            </div>
+
+            <div class="projects__grid">
+                <!-- Карточка проекта 1 -->
+                <div class="project-card" data-category="html">
+                    <div class="project-card__image">
+                        <img src="images/personal-site.jpg" alt="Личный сайт">
+                    </div>
+                    <div class="project-card__content">
+                        <h3 class="project-card__title">Личный сайт</h3>
+                        <div class="project-card__tags">
+                            <span class="tag tag--html">HTML</span>
+                            <span class="tag tag--css">CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка проекта 2 -->
+                <div class="project-card" data-category="js">
+                    <div class="project-card__image">
+                        <img src="images/todo-app.jpg" alt="Todo-приложение">
+                    </div>
+                    <div class="project-card__content">
+                        <h3 class="project-card__title">Тodo-приложение</h3>
+                        <div class="project-card__tags">
+                            <span class="tag tag--js">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка проекта 3 -->
+                <div class="project-card" data-category="react">
+                    <div class="project-card__image">
+                        <img src="images/ecommerce.jpg" alt="Интернет-магазин">
+                    </div>
+                    <div class="project-card__content">
+                        <h3 class="project-card__title">Интернет-магазин</h3>
+                        <div class="project-card__tags">
+                            <span class="tag tag--react">React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка проекта 4 -->
+                <div class="project-card" data-category="html">
+                    <div class="project-card__image">
+                        <img src="images/portfolio.jpg" alt="Портфолио">
+                    </div>
+                    <div class="project-card__content">
+                        <h3 class="project-card__title">Портфолио</h3>
+                        <div class="project-card__tags">
+                            <span class="tag tag--bootstrap">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка проекта 5 -->
+                <div class="project-card" data-category="js">
+                    <div class="project-card__image">
+                        <img src="images/weather-app.jpg" alt="Приложение погоды">
+                    </div>
+                    <div class="project-card__content">
+                        <h3 class="project-card__title">Приложение погоды</h3>
+                        <div class="project-card__tags">
+                            <span class="tag tag--js">JavaScript</span>
+                            <span class="tag tag--api">API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects__progress">
+                <span class="progress-text">2/5</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <p class="footer__text">© 2025 Контакты</p>
+    </footer>
+</div>
+
+<!-- Модальное окно для проекта -->
+<div class="modal" id="project-modal">
+    <div class="modal__content">
+        <button class="modal__close" id="modal-close">&times;</button>
+        <div class="modal__body">
+        </div>
+    </div>
+</div>
+
+<script src="main.js" defer></script>
 </body>
 </html>
