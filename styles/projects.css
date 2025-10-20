@@ -1,0 +1,452 @@
+/* CSS Variables (from index.css) */
+:root {
+    /* Colors */
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary-color: #64748b;
+    --accent-color: #f59e0b;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+
+    /* Text Colors */
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --text-white: #ffffff;
+
+    /* Background Colors */
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-header: #1e293b;
+    --bg-footer: #1e293b;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    --gradient-dark: linear-gradient(135deg, var(--bg-header), #334155);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+/* Reset and Base Styles (from index.css) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-body);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Page Layout (from index.css) */
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header (from index.css) */
+.header {
+    background: var(--gradient-dark);
+    color: var(--text-white);
+    padding: var(--space-xl) 0;
+    text-align: center;
+}
+
+.header__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+}
+
+/* Navigation (from index.css) */
+.nav {
+    background: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+.nav__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+}
+
+.nav__item {
+    margin: 0;
+}
+
+.nav__link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav__link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.nav__item--active .nav__link {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Main Content (from index.css) */
+.main {
+    flex: 1;
+    /* Добавляем контейнер, чтобы контент не прилипал к краям */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-md);
+    width: 100%;
+}
+
+/* Section Title (from index.css) */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+/* Project Card (from index.css) */
+.project-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    cursor: pointer; /* Добавлено из styles.css */
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.project-card__image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.project-card:hover .project-card__image img {
+    transform: scale(1.05);
+}
+
+.project-card__content {
+    padding: var(--space-lg);
+}
+
+.project-card__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+/* Tag Component (Base from index.css) */
+.tag {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--primary-light);
+    color: var(--text-white);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Specific Tag Colors (from styles.css) */
+.tag--html {
+    background-color: #e34f26;
+    color: white;
+}
+.tag--css {
+    background-color: #1572b6;
+    color: white;
+}
+.tag--js {
+    background-color: #f7df1e;
+    color: #333;
+}
+.tag--react {
+    background-color: #61dafb;
+    color: #333;
+}
+.tag--bootstrap {
+    background-color: #7952b3;
+    color: white;
+}
+.tag--api {
+    background-color: #5a67d8;
+    color: white;
+}
+
+/* Button Component (from index.css) */
+.button {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+/* ... (другие стили кнопок можно оставить) ... */
+
+
+/* Projects Page Specific Styles (from index.css, adapted) */
+.projects__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.projects__title {
+    /* Используем h2 из HTML, поэтому стилизуем его */
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.projects__filters {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+/* Стили для .filter-btn из index.css (переименовано из .filter) */
+.filter-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-card);
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn--active {
+    background: var(--primary-color);
+    color: var(--text-white);
+    border-color: var(--primary-color);
+}
+
+.projects__grid {
+    display: grid;
+    /* Изменено minmax с 350px (index.css) на 280px (styles.css) для лучшей сетки */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+
+/* Modal Styles (from styles.css, adapted to index.css variables) */
+#project-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-card);
+    border: none;
+    border-radius: var(--radius-lg); /* Используем var */
+    padding: 0;
+    max-width: 800px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1001;
+    box-shadow: var(--shadow-lg); /* Добавляем тень */
+}
+
+#project-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#project-modal .modal-header {
+    background: var(--gradient-dark); /* Используем var */
+    color: var(--text-white); /* Используем var */
+    padding: var(--space-md); /* Используем var */
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0; /* Используем var */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#project-modal .modal__close {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-light); /* Используем var */
+    line-height: 1;
+    padding: 0 var(--space-xs);
+    transition: var(--transition);
+}
+
+#project-modal .modal__close:hover {
+    color: var(--text-white);
+}
+
+#project-modal .modal-content {
+    padding: var(--space-lg); /* Используем var */
+}
+
+
+/* Footer (from index.css, simplified for projects.html) */
+/* Footer */
+.footer {
+    background: var(--gradient-dark);
+    color: var(--text-white);
+    padding: var(--space-xl) 0;
+    margin-top: auto;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.footer__copyright {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.footer__links {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.footer__link {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer__link:hover {
+    color: var(--text-white);
+}
+
+
+/* Responsive Design (from index.css, pruned) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-sm);
+    }
+
+    .main {
+        padding: var(--space-xl) var(--space-sm);
+    }
+
+    .header__title {
+        font-size: 2rem;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        gap: var(--space-xs);
+        align-items: center;
+    }
+
+    .projects__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .projects__title {
+        text-align: center;
+    }
+
+    .projects__filters {
+        justify-content: center;
+    }
+
+    .projects__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --space-xl: 1.5rem;
+        --space-2xl: 2rem;
+    }
+
+    .section-title,
+    .projects__title {
+        font-size: 1.5rem;
+    }
+
+    .button,
+    .filter-btn {
+        width: 100%;
+    }
+}

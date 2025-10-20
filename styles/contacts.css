@@ -1,0 +1,303 @@
+/* Переменные из второго стиля, адаптированные для унификации */
+:root {
+    /* Цвета */
+    --color-primary: #2563eb; /* Ранее --color-accent / --primary-color */
+    --color-dark: #1e293b; /* Ранее --color-main / --bg-header */
+    --color-light: #f8fafc; /* Ранее --color-light / --bg-body (фон страницы) */
+    --color-text-primary: #1e293b; /* Ранее --color-text / --text-primary */
+    --color-text-secondary: #64748b;
+    --color-white: #ffffff; /* Фон основных блоков */
+    --color-danger: #ef4444; /* Ранее --color-danger / --error-color */
+
+    /* Градиенты */
+    --gradient-header: linear-gradient(135deg, var(--color-dark), #334155);
+
+    /* Тени */
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    /* Скругление */
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* Отступы (в rem) */
+    --space-xs: 0.5rem; /* ~8px */
+    --space-sm: 0.75rem; /* ~12px */
+    --space-md: 1rem; /* ~16px */
+    --space-lg: 1.5rem; /* ~24px */
+    --space-xl: 2rem; /* ~32px */
+    --space-2xl: 3rem; /* ~48px */
+
+    /* Переходы */
+    --transition: all 0.3s ease;
+}
+
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    /* Применяем цвет фона к body для растяжения */
+    background-color: var(--color-light);
+}
+
+/* Блок page */
+.page {
+    /* Убраны max-width и background для растяжения */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Убираем тень, т.к. весь контент теперь "на" фоне */
+}
+
+/* Блок header */
+.header {
+    background: var(--gradient-header);
+    color: var(--color-white);
+    padding: var(--space-xl) 0;
+    text-align: center;
+}
+
+.header__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Блок nav */
+.nav {
+    background: var(--color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+.nav__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+}
+
+.nav__item {
+    margin: 0;
+}
+
+.nav__link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav__link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Модификатор --active */
+.nav__item--active .nav__link {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Блок main */
+.main {
+    flex: 1;
+    /* Контейнер для центрирования контента */
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-md);
+    /* Устанавливаем белый фон для основного контента */
+    background-color: var(--color-white);
+}
+
+/* Блок footer */
+.footer {
+    background: var(--gradient-header);
+    color: var(--color-white);
+    text-align: center;
+    padding: var(--space-lg) 0;
+    margin-top: auto;
+}
+
+.footer__text {
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------- */
+/* Стили для страницы Контакты (адаптировано из первого стиля) */
+/* ------------------------------------------------------------------- */
+
+/* Форма обратной связи */
+.feedback-form {
+    /* Фон уже задан в .main, но оставим для возможного выделения */
+    background: var(--color-white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-xl);
+    border: 1px solid #e2e8f0;
+}
+
+.feedback-form__title {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xl);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: var(--space-sm);
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.required {
+    color: var(--color-danger);
+}
+
+/* Действия формы и кнопка */
+.form-actions {
+    text-align: center;
+    margin-top: var(--space-2xl);
+}
+
+.btn {
+    padding: var(--space-sm) var(--space-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+    width: 250px;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    background: var(--color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Дополнительная контактная информация */
+.contact-info {
+    text-align: center;
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg);
+    background: var(--color-light); /* Используем светлый фон страницы как фон блока */
+    color: var(--color-text-primary);
+    border-radius: var(--radius-lg);
+    line-height: 2;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-left: 5px solid var(--color-primary);
+}
+
+.contact-info br {
+    display: none;
+}
+
+.contact-info > * {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info:first-line {
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-sm);
+}
+
+/* ------------------------------------------------------------------- */
+/* Адаптивность */
+/* ------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .header__title {
+        font-size: 2rem;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        gap: var(--space-xs);
+        padding: var(--space-sm) 0;
+    }
+
+    .nav__link {
+        padding: var(--space-xs) var(--space-md);
+    }
+
+    .main {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .feedback-form {
+        padding: var(--space-md);
+    }
+
+    .feedback-form__title {
+        font-size: 1.5rem;
+        margin-bottom: var(--space-lg);
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-size: 1rem;
+        padding: var(--space-md) var(--space-xl);
+    }
+
+    .contact-info {
+        font-size: 1rem;
+        padding: var(--space-md);
+    }
+}
