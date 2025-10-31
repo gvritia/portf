@@ -7,9 +7,55 @@ function submitForm() {
     const form = document.getElementById('feedbackForm');
     if (!form) return;
 
+    // Сброс предыдущих состояний ошибок
+    form.querySelectorAll('[aria-invalid="true"]').forEach(el => {
+        el.removeAttribute('aria-invalid');
+        const errorId = el.getAttribute('aria-describedby');
+        // Убираем ссылку на сообщение об ошибке, если оно было
+        if (errorId && document.getElementById(errorId)) {
+            // В реальном приложении здесь нужно удалить только id ошибки,
+            // оставив id подсказки, но для простоты удалим полностью:
+            el.removeAttribute('aria-describedby');
+            document.getElementById(errorId).remove();
+        }
+    });
+
     if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
+        // Находим первое невалидное поле
+        const invalidFields = form.querySelectorAll(':invalid');
+
+        if (invalidFields.length > 0) {
+            const firstInvalidField = invalidFields[0];
+
+            // 1. Устанавливаем aria-invalid="true"
+            firstInvalidField.setAttribute('aria-invalid', 'true');
+
+            // 2. Создаем и связываем сообщение об ошибке (aria-describedby)
+            const errorId = `${firstInvalidField.id}-error`;
+            firstInvalidField.setAttribute('aria-describedby', errorId);
+
+            const errorMessage = firstInvalidField.validationMessage || "Пожалуйста, заполните это поле корректно.";
+
+            const errorElement = document.createElement('p');
+            errorElement.id = errorId;
+            errorElement.classList.add('error-message'); // Добавим CSS-класс для стилизации
+            errorElement.textContent = `Ошибка: ${errorMessage}`;
+
+            // Вставляем сообщение об ошибке после поля
+            const formGroup = firstInvalidField.closest('.form-group');
+            if (formGroup) {
+                formGroup.appendChild(errorElement);
+            } else {
+                firstInvalidField.parentNode.insertBefore(errorElement, firstInvalidField.nextSibling);
+            }
+
+            // Перемещаем фокус на первое поле с ошибкой
+            firstInvalidField.focus();
+
+            // reportValidity() можно оставить для нативных всплывающих подсказок
+            form.reportValidity();
+            return;
+        }
     }
 
     const formData = new FormData(form);
@@ -25,6 +71,8 @@ function submitForm() {
     alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
     form.reset();
 }
+
+// ... остальной код main.js без изменений ...
 
 // ==================== ФУНКЦИИ ДЛЯ ДНЕВНИКА (diary.html) ====================
 

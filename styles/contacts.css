@@ -46,6 +46,18 @@ body {
     background-color: var(--color-light);
 }
 
+/* Стили для скрытия контента от визуальных пользователей, но сохранения для скринридеров */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+
 /* Блок page */
 .page {
     /* Убраны max-width и background для растяжения */
@@ -104,6 +116,14 @@ body {
     transform: translateY(-1px);
 }
 
+/* Добавлен четкий индикатор фокуса для ссылок навигации */
+.nav__link:focus {
+    background: rgba(255, 255, 255, 0.2);
+    outline: 2px solid var(--color-light); /* Светлый аутлайн на синем фоне */
+    outline-offset: 2px;
+    transform: none;
+}
+
 /* Модификатор --active */
 .nav__item--active .nav__link {
     background: rgba(255, 255, 255, 0.2);
@@ -131,10 +151,28 @@ body {
     margin-top: auto;
 }
 
+/* Обновленный footer__content для лучшей структуры */
+.footer__content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__links a:hover,
+.footer__links a:focus { /* Добавлен фокус */
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
 .footer__text {
     opacity: 0.9;
     margin: 0;
 }
+/* Конец обновлений footer */
+
 
 /* ------------------------------------------------------------------- */
 /* Стили для страницы Контакты (адаптировано из первого стиля) */
@@ -149,6 +187,20 @@ body {
     box-shadow: var(--shadow-md);
     margin-bottom: var(--space-xl);
     border: 1px solid #e2e8f0;
+}
+
+/* Fieldset/Legend */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
 }
 
 .feedback-form__title {
@@ -181,12 +233,14 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Добавлен четкий индикатор фокуса для полей формы */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
+    outline: 3px solid var(--color-primary); /* Четкий синий аутлайн */
+    outline-offset: 0;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    box-shadow: none; /* Удаляем тень, чтобы не мешала outline */
 }
 
 .form-group textarea {
@@ -227,6 +281,15 @@ body {
     background: var(--color-dark);
     transform: translateY(-2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Добавлен четкий индикатор фокуса для кнопки */
+.btn-primary:focus {
+    background: var(--color-dark);
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: none; /* Убираем translateY(-2px) для фокуса */
 }
 
 /* Дополнительная контактная информация */
@@ -299,5 +362,11 @@ body {
     .contact-info {
         font-size: 1rem;
         padding: var(--space-md);
+    }
+
+    .footer__content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
     }
 }
