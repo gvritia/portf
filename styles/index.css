@@ -283,6 +283,11 @@ body {
     height: 200px;
     overflow: hidden;
 }
+/* Добавляем стили для picture, чтобы он работал как блочный элемент */
+.project-card__image picture {
+    display: block;
+    height: 100%; /* Убедимся, что picture заполняет контейнер */
+}
 
 .project-card__image img {
     width: 100%;
@@ -818,6 +823,7 @@ body {
     :root {
         --space-xl: 1.5rem;
         --space-2xl: 2rem;
+        --transition: all 0.3s ease;
     }
 
     .section-title {

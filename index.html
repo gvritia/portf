@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="page">
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__content">
@@ -18,7 +17,6 @@
         </div>
     </header>
 
-    <!-- Navigation -->
     <nav class="nav">
         <div class="container">
             <ul class="nav__list">
@@ -38,10 +36,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Hero Section -->
             <section class="hero">
                 <div class="hero__content">
                     <div class="hero__image">
@@ -50,7 +46,7 @@
                     <div class="hero__info">
                         <h2 class="hero__greeting">Привет! Я студент</h2>
                         <p class="hero__description">
-                             группа a-xx-xx<br>
+                            группа a-xx-xx<br>
                             Увлекаюсь веб-разработкой и созданием современных интерфейсов
                         </p>
                         <a href="images/eminem.jpg" download="eminem.jpg" class="button button--primary hero__button">
@@ -60,7 +56,6 @@
                 </div>
             </section>
 
-            <!-- Skills Section -->
             <section class="skills">
                 <h2 class="section-title">Мои навыки</h2>
                 <div class="skills__grid">
@@ -103,13 +98,17 @@
                 </div>
             </section>
 
-            <!-- Projects Preview -->
             <section class="projects-preview">
                 <h2 class="section-title">Лучшие проекты</h2>
                 <div class="projects-preview__grid">
                     <article class="project-card">
                         <div class="project-card__image">
-                            <img src="images/project1.jpg" alt="Личный сайт">
+                            <picture>
+                                <source media="(max-width: 767px)"
+                                        srcset="images/project1-mobile.jpg">
+                                <source srcset="images/project1-large.jpg 1x, images/project1-retina.jpg 2x">
+                                <img src="images/project1.jpg" alt="Личный сайт">
+                            </picture>
                         </div>
                         <div class="project-card__content">
                             <h3 class="project-card__title">Личный сайт</h3>
@@ -125,7 +124,12 @@
                     </article>
                     <article class="project-card">
                         <div class="project-card__image">
-                            <img src="images/project2.jpg" alt="Todo приложение">
+                            <picture>
+                                <source media="(max-width: 767px)"
+                                        srcset="images/project2-mobile.jpg">
+                                <source srcset="images/project2-large.jpg 1x, images/project2-retina.jpg 2x">
+                                <img src="images/project2.jpg" alt="Todo приложение">
+                            </picture>
                         </div>
                         <div class="project-card__content">
                             <h3 class="project-card__title">Todo приложение</h3>
@@ -140,7 +144,12 @@
                     </article>
                     <article class="project-card">
                         <div class="project-card__image">
-                            <img src="images/project3.jpg" alt="Интернет-магазин">
+                            <picture>
+                                <source media="(max-width: 767px)"
+                                        srcset="images/project3-mobile.jpg">
+                                <source srcset="images/project3-large.jpg 1x, images/project3-retina.jpg 2x">
+                                <img src="images/project3.jpg" alt="Интернет-магазин">
+                            </picture>
                         </div>
                         <div class="project-card__content">
                             <h3 class="project-card__title">Интернет-магазин</h3>
@@ -158,7 +167,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
